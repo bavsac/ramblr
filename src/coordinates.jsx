@@ -23,7 +23,9 @@ export default function Coordinates() {
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
-    text = JSON.stringify(location);
+    const longitude = JSON.stringify(location.coords.longitude)
+    const latitude = JSON.stringify(location.coords.latitude)
+    text = `Latitude: ${latitude} Longitude: ${longitude}`;
   }
 
   return (
