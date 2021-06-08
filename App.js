@@ -18,7 +18,15 @@ function App() {
 }
 
 //this is already signing up users and forgot user details
-export default withAuthenticator(App, { includeGreetings: true });
+export default withAuthenticator(App, {
+  // Render a sign out button once logged in
+  includeGreetings: true,
+  usernameAttributes: 'email'
+});
+
+const ShowAfterSignIn = () => {
+  <lable>Hello</lable>;
+};
 
 const styles = StyleSheet.create({
   container: {
