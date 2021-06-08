@@ -17,7 +17,8 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+//this is already signing up users and forgot user details
+export default withAuthenticator(App, { includeGreetings: true });
 
 const styles = StyleSheet.create({
   container: {
