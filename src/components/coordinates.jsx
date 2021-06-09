@@ -30,28 +30,25 @@ export default function Coordinates() {
     console.log(typeof latitude, '<<this is the type of latitude');
     console.log(typeof +latitude, '<<this is the type of latitude with a +');
     text = `Latitude: ${latitude} Longitude: ${longitude}`;
+    
   }
+  const region = {
+      
+    latitude: location.coords.latitude,
+    longitude: location.coords.longitude,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  
+}
 
-  var markers = [
-    {
-      latitude: 37.78825,
-      longitude: -122.4324,
-      title: 'Foo Place',
-      subtitle: '1234 Foo Drive'
-    }
-  ];
 
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>{text}</Text>
-      <MapView
+      <MapView 
         style={{ width: 600, height: 300 }}
-        region={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
+        showsUserLocation
+        region={region}
         
       >
         
