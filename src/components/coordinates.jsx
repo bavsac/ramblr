@@ -54,7 +54,7 @@ export default function Coordinates() {
         }}
         
       >
-      <Marker key={1} coordinate={'hello'} title={'marker'} description={'the marker'}/>
+        
       </MapView>
     </View>
   );
