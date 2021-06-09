@@ -5,7 +5,12 @@ import MapView from 'react-native-maps';
 import Marker from 'react-native-maps'
 
 export default function Coordinates() {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState({
+    coords: {
+      longitude: 0,
+      latitude: 0,
+    }
+  });
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
@@ -16,8 +21,8 @@ export default function Coordinates() {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      let currentLocation = await Location.getCurrentPositionAsync({});
+      setLocation(currentLocation);
     })();
   }, []);
 
@@ -32,8 +37,9 @@ export default function Coordinates() {
     text = `Latitude: ${latitude} Longitude: ${longitude}`;
     
   }
+  
   const region = {
-      
+    
     latitude: location.coords.latitude,
     longitude: location.coords.longitude,
     latitudeDelta: 0.0922,
