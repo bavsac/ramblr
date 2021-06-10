@@ -13,17 +13,21 @@ import CountDown from 'react-native-countdown-component';
 //import moment to help you play with date and time
 import moment from 'moment';
 
-const Timer = () => {
+
+const Timer = ({ timerDuration }) => {
   const [totalDuration, setTotalDuration] = useState(0);
 
-  useEffect(() => {
+  console.log(timerDuration, 'timerDuration inside Timer');
+
+  useEffect((timerDuration) => {
     var today = new Date();
-    var date =
-      today.getFullYear() +
-      '-' +
-      (today.getMonth() + 1) +
-      '-' +
-      today.getDate();
+    // console.log(today, '<< today');
+    // var date =
+    //   today.getFullYear() +
+    //   '-' +
+    //   (today.getMonth() + 1) +
+    //   '-' +
+    //   today.getDate();
     var time =
       today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     var dateTime = date + ' ' + time;
@@ -33,23 +37,27 @@ const Timer = () => {
     //that.setState({ totalDuration: 30 }); //which is 30 sec
     var date = moment().utcOffset('-02:00').format('YYYY-MM-DD hh:mm:ss');
     //Getting the current date-time with required formate and UTC
-    var expirydate = '2021-06-10 12:00:45'; //You can set your own date-time
+    var expirydate = timerDuration; //You can set your own date-time
     //Let suppose we have to show the countdown for above date-time
-    var diffr = moment.duration(moment(expirydate).diff(moment(date)));
+    var diffr = moment.duration(moment(timerDuration).diff(moment(date)));
     //difference of the expiry date-time given and current date-time
     var hours = parseInt(diffr.asHours());
     var minutes = parseInt(diffr.minutes());
     var seconds = parseInt(diffr.seconds());
+    console.log(hours, minutes)
+    
     var d = hours * 60 * 60 + minutes * 60 + seconds;
+    console.log(hours, minutes)
     //converting in seconds
+    // console.log(totalDuration, '<<totalDuration');
+    console.log(d, hours, minutes, seconds, '<<< hours, minutes, seconds');
     setTotalDuration(d);
     //Settign up the duration of countdown in seconds to re-render
-  }, []);
+  }, [timerDuration]);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        
         <CountDown
           until={totalDuration}
           //duration of countdown in seconds

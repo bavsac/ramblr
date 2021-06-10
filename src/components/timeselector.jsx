@@ -7,13 +7,11 @@ export const Timeselector = () => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [selectedTime, setSelectedTime] = useState()
-  // const [onChangeTimer, setOnChangeTimer] = useState()
-
-  // let userTimer = []
-  // console.log(userTimer)
+  const [selectedTime, setSelectedTime] = useState(0)
+  const [timerDuration, setTimerDuration] = useState()
 
   const onChange = (event, selectedDate) => {
+    
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
@@ -30,8 +28,15 @@ export const Timeselector = () => {
   };
 
   const showTimepicker = () => {
-    showMode('time');
+   showMode('time');
   };
+  let expiry;
+   if (selectedTime !== 0) {
+
+    expiry = selectedTime.slice(1, -6).replace(/T/g,' ');
+   }
+  //  console.log(typeof expiry, '<<< expiry type')
+  console.log(timerDuration, '<<inside timeselector')
 
   return (
     <View>
@@ -42,19 +47,19 @@ export const Timeselector = () => {
         <Button onPress={showTimepicker} title="Show time picker!" />
       </View>
       <View>
-        <Button onPress={() => {console.log(selectedTime, '<<< this is start timer button')}} title="Start timer!" />
+        <Button onPress={() => {setTimerDuration(expiry)}} title="Start timer!" />
       </View>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
           mode={mode}
-          is24Hour={false}
+          is24Hour={true}
           display="default"
           onChange={onChange}
         />
       )}
-      <Timer/>
+      <Timer timerDuration={timerDuration}/>
     </View>
   );
 };
