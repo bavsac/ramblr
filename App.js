@@ -6,7 +6,7 @@ import Amplify from 'aws-amplify';
 import config from './src/aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import Coordinates from './src/components/coordinates';
-import Timer from './src/components/timer';
+import {Timeselector} from './src/components/timeselector';
 
 Amplify.configure(config);
 
@@ -15,7 +15,7 @@ function App() {
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
-      <Timer />
+      <Timeselector />
       <Coordinates />
     </View>
   );

@@ -49,9 +49,7 @@ const Timer = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.title}>
-          React Native CountDown Timer | react-native-countdown-component
-        </Text>
+        
         <CountDown
           until={totalDuration}
           //duration of countdown in seconds
