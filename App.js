@@ -6,6 +6,7 @@ import Amplify from 'aws-amplify';
 import config from './src/aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import Coordinates from './src/components/coordinates';
+import Timer from './src/components/timer';
 
 Amplify.configure(config);
 
@@ -13,7 +14,8 @@ function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
+      <Timer />
       <Coordinates />
     </View>
   );
@@ -23,7 +25,7 @@ function App() {
 export default withAuthenticator(App, {
   // Render a sign out button once logged in
   includeGreetings: true,
-  usernameAttributes: 'email'
+  usernameAttributes: 'email',
 });
 
 const ShowAfterSignIn = () => {
@@ -35,6 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
