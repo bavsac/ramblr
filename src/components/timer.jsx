@@ -14,10 +14,11 @@ import CountDown from 'react-native-countdown-component';
 import moment from 'moment';
 
 const Timer = ({ timerDuration }) => {
-  const [totalDuration, setTotalDuration] = useState(0);
+  const [totalDuration, setTotalDuration] = useState();
 
   console.log(timerDuration, 'timerDuration inside Timer');
 
+<<<<<<< HEAD
   useEffect(
     (timerDuration) => {
       var today = new Date();
@@ -56,6 +57,43 @@ const Timer = ({ timerDuration }) => {
     },
     [timerDuration]
   );
+=======
+  useEffect((timerDuration) => {
+    const today = new Date();
+    // console.log(today, '<< today');
+    // const date =
+    //   today.getFullYear() +
+    //   '-' +
+    //   (today.getMonth() + 1) +
+    //   '-' +
+    //   today.getDate();
+    const time =
+      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    //We are showing the coundown timer for a given expiry date-time
+    //If you are making a quize type app then you need to make a simple timer
+    //which can be done by using the simple like given below
+    //that.setState({ totalDuration: 30 }); //which is 30 sec
+    const date = moment().utcOffset('-02:00').format('YYYY-MM-DD hh:mm:ss');
+    //Getting the current date-time with required formate and UTC
+    const expirydate = timerDuration; //You can set your own date-time
+    //Let suppose we have to show the countdown for above date-time
+    const diffr = moment.duration(moment(timerDuration).diff(moment(date)));
+    //difference of the expiry date-time given and current date-time
+    const hours = parseInt(diffr.asHours());
+    const minutes = parseInt(diffr.minutes());
+    const seconds = parseInt(diffr.seconds());
+    console.log(hours, minutes);
+
+    const d = hours * 60 * 60 + minutes * 60 + seconds;
+    console.log(hours, minutes);
+    //converting in seconds
+    // console.log(totalDuration, '<<totalDuration');
+    console.log(d, hours, minutes, seconds, '<<< hours, minutes, seconds');
+    setTotalDuration(d);
+    //Settign up the duration of countdown in seconds to re-render
+  }, []);
+>>>>>>> 29ef0725574ad6b492b92b93307e93e9282bd032
 
   return (
     <SafeAreaView style={styles.container}>

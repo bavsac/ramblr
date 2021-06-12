@@ -1,21 +1,26 @@
 import React, {useState} from 'react';
-import {View, Button, Platform} from 'react-native';
+import {View, Button, Platform, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Timer from './timer'
+import {durationInSeconds} from '../utils/time-utils'
+import Countdown from './countdown'
+import AlertTimer from './alertTimer'
 
 export const Timeselector = () => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [selectedTime, setSelectedTime] = useState(0)
-  const [timerDuration, setTimerDuration] = useState()
+  const [duration, setDuration] = useState(' ');
+  const [timerRunning, setTimerRunning] = useState(false)
 
   const onChange = (event, selectedDate) => {
     
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    setSelectedTime(JSON.stringify(event.nativeEvent.timestamp));
+    const output = durationInSeconds(event.nativeEvent.timestamp)
+    setDuration(output)
+    console.log(output, '<< output')
   };
 
   const showMode = (currentMode) => {
@@ -30,24 +35,18 @@ export const Timeselector = () => {
   const showTimepicker = () => {
    showMode('time');
   };
-  let expiry;
-   if (selectedTime !== 0) {
-
-    expiry = selectedTime.slice(1, -6).replace(/T/g,' ');
-   }
-  //  console.log(typeof expiry, '<<< expiry type')
-  console.log(timerDuration, '<<inside timeselector')
 
   return (
     <View>
       <View>
+        <AlertTimer />
         <Button onPress={showDatepicker} title="Show date picker!" />
       </View>
       <View>
         <Button onPress={showTimepicker} title="Show time picker!" />
       </View>
       <View>
-        <Button onPress={() => {setTimerDuration(expiry)}} title="Start timer!" />
+        <Button onPress={() => {setTimerRunning(true)}} title="Start timer!" />
       </View>
       {show && (
         <DateTimePicker
@@ -59,7 +58,7 @@ export const Timeselector = () => {
           onChange={onChange}
         />
       )}
-      <Timer timerDuration={timerDuration}/>
+      <Countdown timerRunning={timerRunning} duration={duration}/>
     </View>
   );
 };

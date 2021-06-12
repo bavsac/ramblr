@@ -12,7 +12,8 @@ import AppButton from './src/components/AppButton';
 
 Amplify.configure(config);
 
-function App() {
+function App(props) {
+  console.log(props.authData.attributes.email);
   async function signOut() {
     try {
       await Auth.signOut();
