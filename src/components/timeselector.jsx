@@ -4,6 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Timer from './timer'
 import {durationInSeconds} from '../utils/time-utils'
 import Countdown from './countdown'
+import AlertTimer from './alertTimer'
 
 export const Timeselector = () => {
   const [date, setDate] = useState(new Date());
@@ -38,6 +39,7 @@ export const Timeselector = () => {
   return (
     <View>
       <View>
+        <AlertTimer />
         <Button onPress={showDatepicker} title="Show date picker!" />
       </View>
       <View>
